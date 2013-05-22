@@ -26,6 +26,11 @@ nchar_test() ->
     [id(B) || _ <- lists:seq(1,1000), B <- [random_binary(2, 6)]],
     ok.
 
+term_test() ->
+    T = {foo, bar},
+    ?assertEqual(T, base64url:decode_term(base64url:encode_term(T))),
+    ok.
+
 is_base64url_test_() ->
     [ ?_assertEqual(true,  base64url:is_base64url("adsf-"))
     , ?_assertEqual(false, base64url:is_base64url("123+"))

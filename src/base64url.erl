@@ -8,7 +8,9 @@
 -module(base64url).
 
 -export([ decode/1
+        , decode_term/1
         , encode/1
+        , encode_term/1
         , is_base64url/1
         ]).
 
@@ -18,11 +20,19 @@ encode(B) when is_binary(B) ->
 encode(L) when is_list(L) ->
     encode_binary(iolist_to_binary(L)).
 
+-spec encode_term(term()) -> binary().
+encode_term(T) ->
+    encode(term_to_binary(T)).
+
 -spec decode(iolist()) -> binary().
 decode(B) when is_binary(B) ->
     decode_binary(B);
 decode(L) when is_list(L) ->
     decode_binary(iolist_to_binary(L)).
+
+-spec decode_term(binary()) -> term().
+decode_term(B) ->
+    binary_to_term(decode(B)).
 
 %% Implementation, derived from stdlib base64.erl
 
