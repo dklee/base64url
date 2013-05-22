@@ -1,5 +1,3 @@
--module(base64url).
--export([encode/1, decode/1]).
 %% @doc URL and filename safe base64 variant with no padding,
 %% also known as "base64url" per RFC 4648.
 %%
@@ -7,6 +5,12 @@
 %% '-' is used in place of '+' (62),
 %% '_' is used in place of '/' (63),
 %% padding is implicit rather than explicit ('=').
+-module(base64url).
+
+-export([ decode/1
+        , encode/1
+        , is_base64url/1
+        ]).
 
 -spec encode(iolist()) -> binary().
 encode(B) when is_binary(B) ->
@@ -81,3 +85,13 @@ b64d(X) ->
     b64d_ok(element(X, ?DECODE_MAP)).
 
 b64d_ok(I) when is_integer(I) -> I.
+
+b64d_is(I) when is_integer(I) ->
+    element(I, ?DECODE_MAP) =/= bad;
+b64d_is(_) -> false.
+
+
+is_base64url(B) when is_binary(B) ->
+    is_base64url(binary_to_list(B));
+is_base64url(L) when is_list(L) ->
+    lists:all(fun b64d_is/1, lists:flatten(L)).

@@ -25,3 +25,10 @@ nchar_test() ->
     %% 1000 tests of 2-6 char strings
     [id(B) || _ <- lists:seq(1,1000), B <- [random_binary(2, 6)]],
     ok.
+
+is_base64url_test_() ->
+    [ ?_assertEqual(true,  base64url:is_base64url("adsf-"))
+    , ?_assertEqual(false, base64url:is_base64url("123+"))
+    , ?_assertEqual(true,  base64url:is_base64url(<<"12345__">>))
+    , ?_assertEqual(false, base64url:is_base64url(<<"fda ///">>))
+    ].
