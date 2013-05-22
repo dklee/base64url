@@ -1,4 +1,4 @@
--module(mochiweb_base64url).
+-module(base64url).
 -export([encode/1, decode/1]).
 %% @doc URL and filename safe base64 variant with no padding,
 %% also known as "base64url" per RFC 4648.

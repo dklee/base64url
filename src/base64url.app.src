@@ -1,0 +1,8 @@
+%% This is generated from src/mochiweb.app.src
+{application, base64url,
+ [{description, "base64url implementation forked from Mochiweb"},
+  {vsn, git},
+  {modules, []},
+  {registered, []},
+  {env, []},
+  {applications, [kernel, stdlib]}]}.

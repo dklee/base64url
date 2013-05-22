@@ -1,14 +1,14 @@
--module(mochiweb_base64url_tests).
+-module(base64url_tests).
 -include_lib("eunit/include/eunit.hrl").
 
 id(X) ->
     ?assertEqual(
        X,
-       mochiweb_base64url:decode(mochiweb_base64url:encode(X))),
+       base64url:decode(base64url:encode(X))),
     ?assertEqual(
        X,
-       mochiweb_base64url:decode(
-         binary_to_list(mochiweb_base64url:encode(binary_to_list(X))))).
+       base64url:decode(
+         binary_to_list(base64url:encode(binary_to_list(X))))).
 
 random_binary(Short,Long) ->
     << <<(random:uniform(256) - 1)>>
